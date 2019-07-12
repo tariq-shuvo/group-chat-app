@@ -100,3 +100,7 @@ a {
 #messageContainer{
   display: none;
 }
+
+.self{
+  background: lightcoral !important;
+}
