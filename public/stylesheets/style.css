@@ -1,0 +1,102 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#chat_messages div{
+  background: lightblue;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+#chat_messages p{
+  background: lightgray;
+    color: gray;
+    text-align: center;
+    padding: 5px;
+    font-weight: 100;
+    font-size: 11px;
+    width: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+#chat_messages {
+  height: 500px;
+    border: 1px solid blue;
+    width: 70%;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+#active_users div{
+  width: 100%;
+  background: lightblue;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+#active_users {
+  height: 500px;
+    border: 1px solid blue;
+    width: 30%;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+#send_messages {
+  display: flex;
+}
+
+#message {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#user_msg {
+  width: 80%;
+  height: 25px;
+  padding-left: 5px;
+  font-size: 14px;
+  border: 1px solid blue;
+}
+
+#send_btn {
+  width: 20%;
+  height: 30px;
+  font-size: 13px;
+}
+
+.container {
+  
+}
+
+.message_users {
+  display: flex;
+}
+
+.nameInputForm{
+  display: flex;
+}
+
+#name_btn{
+  width: 20%;
+    height: 35px;
+    font-size: 14px;
+}
+
+#enterName{
+  width: 50%;
+  height: 30px;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+#messageContainer{
+  display: none;
+}

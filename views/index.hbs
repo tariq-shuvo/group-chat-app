@@ -1,0 +1,86 @@
+<div class="container" id="nameContainer">
+    <div class="nameForm">
+        <form id="nameInputForm">
+            <input type="text" id="enterName" placeholder="Enter your name" autocomplete="off" required>
+            <button type="submit" id="name_btn">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="container" id="messageContainer">
+    <h3>Messages</h3>
+    <div class="message_users">
+        <div id="chat_messages"></div>
+        <div id="active_users"></div>
+    </div>
+    <div id="send_messages">
+        <form id="message">
+            <input type="text" id="user_msg" placeholder="Your message" autocomplete="off">
+            <button type="submit" id="send_btn">Send</button>
+        </form>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/javascripts/socket.io.js"></script>
+<script>
+    $(document).ready(function(){
+        var socket = io();
+        var allMessages = $("#chat_messages") 
+
+        $("#nameInputForm").submit(function(e){
+            e.preventDefault();
+            var enterName = $("#enterName").val();
+
+            if(enterName !== null)
+            {
+                socket.emit('chat join', enterName);
+                socket.emit('chat user', enterName);
+                $("#nameContainer").hide();
+                $("#messageContainer").show();
+            }
+        })
+
+        socket.on('chat join', (user)=>{
+            if(user!==$("#enterName").val())
+            {
+                $("#chat_messages").append('<p>'+user+' joined in chat</p>')
+            }
+        });
+
+        socket.on('chat left', (user)=>{
+            $("#chat_messages").append('<p>'+user+' left from chat</p>')
+        });
+
+        socket.on('chat user', (users)=>{
+          $("#active_users").html("")  
+          if(users.length>1)
+          {
+              for(x in users){
+                    if(users[x]!==$("#enterName").val()){
+                        $("#active_users").append("<div>"+users[x]+"</div>")
+                    }
+                }
+          }else{
+              $("#active_users").html("<div>No one active</div>")
+          }
+          
+        })
+
+        $("#message").submit(function(e){
+            e.preventDefault();
+
+            var data = {
+                user: $("#enterName").val(),
+                msg: $("#user_msg").val()
+                };
+            socket.emit('chat message', data);
+            $("#user_msg").val('');
+            return false;
+            
+        })
+
+        socket.on('chat message', (data)=>{  
+          $("#chat_messages").append('<div>'+'<b>'+data.user+'</b>: '+data.msg+'</div>')
+        })
+    })
+</script>
